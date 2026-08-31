@@ -1,3 +1,3 @@
-# Habbit Pocket
+# R2D2
 
-![Habbit Pocket](Images/cover.png)
+![R2D2](Images/cover.png)
