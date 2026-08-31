@@ -107,8 +107,8 @@ logger:
     respeaker_xvf3800: INFO
 
 api:
-  encryption:
-    key: "2me/t4TuPMjwEoHWgAXqVLgDjAunbAZco2eDiwTHMWc="
+#  encryption:
+#    key: "2me/t4TuPMjwEoHWgAXqVLgDjAunbAZco2eDiwTHMWc="
   id: api_id
   actions:
     - action: start_va
@@ -1102,16 +1102,16 @@ light:
               duration: 0.5s
     segments:
       - id: led_ring
-        from: 7
-        to: 7
+        from: 1
+        to: 1
 
   - platform: partition
     name: "Big LED"
     id: big_led
     segments:
       - id: led_ring
-        from: 4
-        to: 5
+        from: 5
+        to: 6
 
   - platform: esp32_rmt_led_strip
     id: led_ring
