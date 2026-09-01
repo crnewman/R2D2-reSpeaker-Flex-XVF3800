@@ -14,4 +14,4 @@ This project is built for the **reSpeaker Flex XVF3800 Circular**.
 
 You can download all STL files for free from [Creality Cloud](https://www.crealitycloud.com/es/model-detail/r2d2-respeaker-flex-xvf3800).
 
-I have used [Blue](https://amzn.to/4uAwh2I), [Grey](https://amzn.to/4u86RbG), [White](https://amzn.to/43oGbZz), [Black](https://amzn.to/3RuW7Xv) and [Translucid](https://amzn.to/4wXNc0R) filaments and a silver spray.
+I have used [Blue](https://amzn.to/4uAwh2I), [Grey](https://amzn.to/4u86RbG), [White](https://amzn.to/43oGbZz), [Black](https://amzn.to/3RuW7Xv) and [Translucid](https://amzn.to/4wXNc0R) filaments and a [silver spray](https://link.amazon/B0hX0ncqg).
