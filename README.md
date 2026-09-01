@@ -10,6 +10,10 @@ This project is built for the **reSpeaker Flex XVF3800 Circular**.
 - [8 LEDs Ring WS2812B](https://s.click.aliexpress.com/e/_c38J21tN)
 - [Speaker 4 Ohm 5 W 50 mm](https://s.click.aliexpress.com/e/_c3UsYYsX)
 
+## Firmware setup
+
+Follow [this guide](https://aguacatec.es/activar-assist-con-respeaker-flex/) to install R2D2 in your board, or [flash it](https://aguacatec.es/activar-assist-con-respeaker-flex/#Personalizacion_como_R2D2) from our website.
+
 ## STL Files and Filaments
 
 You can download all STL files for free from [Creality Cloud](https://www.crealitycloud.com/es/model-detail/r2d2-respeaker-flex-xvf3800).
