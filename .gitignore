@@ -1,0 +1,10 @@
+# Python environment
+.venv/
+__pycache__/
+
+# ESPHome build artifacts
+.esphome/
+*.log
+
+# Private credentials
+secrets.yaml
