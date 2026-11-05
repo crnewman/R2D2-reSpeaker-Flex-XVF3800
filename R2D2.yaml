@@ -86,7 +86,7 @@ wifi:
   password: !secret wifi_password
   ap:
     ssid: R2D2 Fallback Hotspot
-    password: "bz2ajLLaW6JW"
+    password: !secret fallback_ap_password
   # Add power management and connection optimizations
   power_save_mode: none  # Disable power saving for better performance
   reboot_timeout: 10min  # Prevent unnecessary reboots
@@ -107,8 +107,8 @@ logger:
     respeaker_xvf3800: INFO
 
 api:
-#  encryption:
-#    key: "2me/t4TuPMjwEoHWgAXqVLgDjAunbAZco2eDiwTHMWc="
+  encryption:
+    key: !secret api_key
   id: api_id
   actions:
     - action: start_va
