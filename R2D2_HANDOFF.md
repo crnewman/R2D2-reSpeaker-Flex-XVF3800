@@ -16,9 +16,13 @@ The user confirmed the playback fix compiled, uploaded, and is now working. Okay
 ## Repository and toolchain
 
 - Repository: `C:\Dev\R2D2-reSpeaker-Flex-XVF3800`.
-- Origin: https://github.com/TitoTB/R2D2-reSpeaker-Flex-XVF3800
-- Branch last verified: `r2d2-esphome-2026-10-4`.
-- Last independently verified commit before the fix: `267971e` (Compile R2D2 with ESPHome 2026.10.4 integration). Verify current HEAD and status; a subsequent commit has not been confirmed.
+- Origin (user-owned fork; fetch/push): https://github.com/crnewman/R2D2-reSpeaker-Flex-XVF3800.git
+- Upstream (original project; fetch/reference): https://github.com/TitoTB/R2D2-reSpeaker-Flex-XVF3800.git
+- Working branch: `r2d2-esphome-2026-10-4`.
+- Tracking branch: `origin/r2d2-esphome-2026-10-4`.
+- GitHub branch: https://github.com/crnewman/R2D2-reSpeaker-Flex-XVF3800/tree/r2d2-esphome-2026-10-4
+- The user confirmed the working fix and handoff were committed, then supplied successful push output confirming this branch was created on the fork and upstream tracking was set. Future pushes from this branch can use `git push`. No pull request or merge was reported.
+- Historical pre-fix commit: `267971e` (Compile R2D2 with ESPHome 2026.10.4 integration). The latest commit hash was not supplied; inspect current HEAD rather than treating this historical hash as current.
 - Active configuration: `R2D2-2026.10.4.yaml`. Original `R2D2.yaml` preserved.
 - Windows 11; `.venv`; prior setup reports Python 3.14.2. ESPHome CLI/runtime 2026.10.2.
 - Filename/tag 2026.10.4 identifies the external integration revision, not the CLI version. Project metadata still says 2026.6.0.
@@ -96,7 +100,7 @@ Later chat permissions allowed reading the repository but blocked direct writes/
 
 This handoff is intended to be committed with the configuration. It contains no credential values. Private server addresses/account-specific browser URLs are omitted. It includes local project paths and room/device names; remove these if the owner prefers not to publish them.
 
-1. Inspect git status --short and git log -1 to establish whether the working fix and this handoff were committed.
+1. Inspect `git status --short`, `git --no-pager log -1 --oneline`, and `git remote -v` for changes since the confirmed push. The working fix and earlier handoff were committed and pushed; this repository/branch documentation update needs its own commit and push after installation.
 2. Preserve the working baseline. Optional follow-up tests: normal reboot, repeated questions, and a longer spoken response. These additional tests have not been recorded.
 3. Continue enclosure/assembly or feature work based on the user's next priority. Do not reflash or change settings merely to resume.
 4. For a new voice failure, inspect the latest HA Cloud assistant debug run, distinguishing microphone/STT, intent, TTS generation, and device playback.
@@ -104,9 +108,10 @@ This handoff is intended to be committed with the configuration. It contains no 
 Suggested explicit staging (review the staged diff before committing):
 
 ```powershell
-git add -- R2D2-2026.10.4.yaml R2D2_HANDOFF.md
-git diff --cached
-git commit -m "Fix R2D2 speech playback and document working baseline"
+git add -- R2D2_HANDOFF.md
+git --no-pager diff --cached
+git commit -m "Document GitHub fork and tracking branch"
+git push
 ```
 
 ## Resume prompt
@@ -115,6 +120,7 @@ Read R2D2_HANDOFF.md and inspect current Git status. R2D2 is a working Seeed reS
 
 ## References
 
+- https://github.com/crnewman/R2D2-reSpeaker-Flex-XVF3800/tree/r2d2-esphome-2026-10-4
 - https://aguacatec.es/disenos-3d/r2d2-respeaker-flex-xvf3800/
 - https://aguacatec.es/academia/r2d2-respeaker-flex-xvf3800/
 - https://github.com/TitoTB/R2D2-reSpeaker-Flex-XVF3800
