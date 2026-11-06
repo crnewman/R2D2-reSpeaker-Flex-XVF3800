@@ -990,10 +990,12 @@ voice_assistant:
     - script.execute:
         id: send_tts_uri_event
         tts_uri: !lambda 'return x;'
-    - script.execute:
-        id: play_sound
-        priority: true
-        sound_file: "command_complete_sound"        
+    # TTS_END delivers the response URL; speech has not finished playing.
+    # Queue the R2D2 completion sound instead of stopping the spoken answer.
+    - media_player.enqueue:
+        id: external_media_player
+        media_url: "audio-file://command_complete_sound"
+        announcement: true
     - light.turn_off: small_led
     - light.turn_off: big_led        
   on_stt_end:
