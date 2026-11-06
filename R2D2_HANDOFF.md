@@ -73,7 +73,7 @@ The assistant reread the local YAML and verified this block is present. The user
 ## Network and diagnostic findings
 
 - Encrypted API handshakes and COM7 runtime logging succeeded earlier in the session.
-- HA Local network URL was Automatic, using a numeric LAN IPv4 address on port 8123. No DNS lookup was needed for that configured endpoint. No DNS or HA URL settings were changed.
+- HA Local network URL was Automatic, using a numeric LAN IPv4 address on port 8123. No DNS lookup was needed for that configured endpoint. No DNS or HA URL settings were changed during speech troubleshooting. The later DNS addition is documented below.
 - Direct announcement playback and the successful voice-response test confirm the audio path works. Do not change DNS based solely on the earlier wizard error.
 - The Sendspin proxy setup banner is separate from the working voice functionality; it was not needed for this test.
 - Earlier HA logs showed an AssertionError at components/esphome/update.py:144 while creating a dashboard firmware-update entity. Its relationship to earlier availability problems was not established. Do not treat it as a current voice failure without new evidence.
@@ -98,9 +98,9 @@ Later chat permissions allowed reading the repository but blocked direct writes/
 
 ## Git and next steps
 
-This handoff is intended to be committed with the configuration. It contains no credential values. Private server addresses/account-specific browser URLs are omitted. It includes local project paths and room/device names; remove these if the owner prefers not to publish them.
+This handoff is intended to be committed with the configuration. It contains no credential values. LAN addresses and the R2D2 MAC address are documented for network maintenance; credentials and account-specific browser URLs are omitted. It includes local project paths and room/device names; remove these if the owner prefers not to publish them.
 
-1. Inspect `git status --short`, `git --no-pager log -1 --oneline`, and `git remote -v` for changes since the confirmed push. The working fix and earlier handoff were committed and pushed; this repository/branch documentation update needs its own commit and push after installation.
+1. Inspect `git status --short`, `git --no-pager log -1 --oneline`, and `git remote -v` for changes since the confirmed push. The working fix and earlier handoff were committed and pushed; review and commit/push the network documentation update separately.
 2. Preserve the working baseline. Optional follow-up tests: normal reboot, repeated questions, and a longer spoken response. These additional tests have not been recorded.
 3. Continue enclosure/assembly or feature work based on the user's next priority. Do not reflash or change settings merely to resume.
 4. For a new voice failure, inspect the latest HA Cloud assistant debug run, distinguishing microphone/STT, intent, TTS generation, and device playback.
@@ -110,7 +110,7 @@ Suggested explicit staging (review the staged diff before committing):
 ```powershell
 git add -- R2D2_HANDOFF.md
 git --no-pager diff --cached
-git commit -m "Document GitHub fork and tracking branch"
+git commit -m "Document R2D2 DNS and DHCP reservation"
 git push
 ```
 
@@ -125,3 +125,15 @@ Read R2D2_HANDOFF.md and inspect current Git status. R2D2 is a working Seeed reS
 - https://aguacatec.es/academia/r2d2-respeaker-flex-xvf3800/
 - https://github.com/TitoTB/R2D2-reSpeaker-Flex-XVF3800
 - https://github.com/formatBCE/Respeaker-XVF3800-ESPHome-integration/releases/tag/2026.10.4
+
+## DNS and DHCP reservation: 2026-11-05
+
+- R2D2 IPv4 address: `192.168.1.169`; Wi-Fi MAC: `68:EE:8F:46:44:5C`.
+- AT&T gateway: `192.168.1.254`. In Home Network > IP Allocation, selected R2D2's MAC and `Private fixed:192.168.1.169`, then saved. Verified `Changes saved` and the matching IP/MAC row showing `Fixed Allocation`, status `on`.
+- R2D2 remains a DHCP client; the gateway reserves this address. No firmware static-IP change or reflash was needed.
+- Added local DNS entry `192.168.1.169 r2d2.local` to primary Pi-hole `192.168.1.2`, then mirrored only that record to MyPi's `pihole-secondary` container at `192.168.1.3`. Existing records on both servers were preserved; this was not a full synchronization.
+- Verified direct A queries over UDP and TCP against both DNS servers return `192.168.1.169`. Public DNS and blocking still work; primary FTL is active and secondary container healthy. Secondary DHCP remains disabled and its LAN-address reply override remains `192.168.1.3`.
+- Router DNS-server settings were not changed. `.local` also uses mDNS on many clients; a direct Pi-hole lookup does not guarantee every client's normal resolver will use the DNS record. Use the reserved IPv4 address for diagnosis if name resolution differs.
+- Root-private pre-change TOML backups: primary `/etc/pihole/r2d2-dns-backup-20261105-212504.toml`; secondary `/etc/pihole/r2d2-dns-backup-20261105-212610.toml` inside its persistent volume. Do not commit backup contents; they may contain credentials.
+- Detailed infrastructure notes: `C:\Dev\HomeAssistant\MyPi\pihole-maintenance.md` and `C:\Dev\HomeAssistant\MyPi\pihole-secondary\README.md`.
+- Preserve the working voice baseline. If the reserved address ever changes, update the router reservation and both DNS entries together.
